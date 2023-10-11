@@ -1,0 +1,35 @@
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Форма</title>
+    </head>
+    <body>
+        <form action="/cgi-bin/process_form.py" method="post">
+            <label for="name">Ім'я:</label>
+            <input type="text" id="name" name="name"><br><br>
+    
+            <label for="email">Email:</label>
+            <input type="text" id="email" name="email"><br><br>
+    
+            <label>Стать:</label>
+            <input type="radio" id="male" name="gender" value="male">
+            <label for="male">Чоловік</label>
+            <input type="radio" id="female" name="gender" value="female">
+            <label for="female">Жінка</label><br><br>
+    
+            <label for="country">Країна:</label>
+            <select id="country" name="country">
+                <option value="ukraine">Україна</option>
+                <option value="rasha-parasha">Московія</option>
+                <option value="usa">США</option>
+            </select><br><br>
+    
+            <input type="checkbox" id="subscribe" name="subscribe" value="yes">
+            <label for="subscribe">Я програміст з великим стажем і очкую зарплату в 20 тисяч доларів</label><br><br>
+    
+            <input type="submit" value="Відправити">
+        </form>
+    </body>
+    </html>
+    
