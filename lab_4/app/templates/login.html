@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}Log in{% endblock %}
+{% block content %}
+<div class="container mt-5">
+  <h2>log in</h2>
+  <div class="row g-0">
+    <div class="col">
+      <div class="p-3">
+        <form method="POST">
+          <div class="mb-3">
+            <label for="username" class="form-label mt-4">Username</label>
+            <input type="text" name="username" class="form-control" id="username" placeholder="Enter username" required>
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label mt-4">Password</label>
+            <input type="password" name="password" class="form-control" id="password" placeholder="Password" autocomplete="off" required>
+          </div>
+          <button type="submit" class="btn btn-primary mt-3 mb-5">Submit</button>
+        </form>
+        {% if error_message %}
+          <div class="alert alert-danger mt-3" role="alert">
+            {{ error_message }}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

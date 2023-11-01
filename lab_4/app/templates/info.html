@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% block title %}Info{% endblock %}
+{% block content %}
+{% block additional_js %}
+    <script src="{{ url_for('static', filename='js/banner.js') }}"></script>
+{% endblock %}
+
+<div class="container mt-5 mb-3">
+  <h2 class="mb-3">Info</h2>
+  {% if 'username' %}
+    <h4 class="mb-3">You logged in as: {{username}}</h4>
+    <form method="post" action="{{ url_for('logout') }}">
+      <button type="submit" class="btn btn-primary mb-5">Exit</button>
+    </form>
+
+
+        <h4>Change password</h4>
+    <form method="POST" action="{{ url_for('change_password') }}">
+        <div class="mb-3">
+            <label for="new_password" class="form-label">New password</label>
+            <input type="password" class="form-control" id="new_password" name="new_password" required>
+        </div>
+        <button type="submit" class="btn btn-primary mb-5 mt-1">Execute</button>
+    </form>
+
+<div class="flash-messages">
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-success alert-dismissible fade show position-fixed bottom-0 end-0" role="alert">
+                    <div class="flash-messages-list">
+                        {{ message }}
+                    </div>
+<button type="button" id="close-button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+</div>
+
+    <h4 class="mb-3">Add Cookie</h4>
+    <form method="post" action="{{ url_for('add_cookie') }}">
+      <div class="form-group">
+        <label for="cookie_key">Key</label>
+        <input type="text" class="form-control" name="cookie_key" id="cookie_key" required>
+      </div>
+      <div class="form-group">
+        <label for="cookie_value">Value</label>
+        <input type="text" class="form-control" name="cookie_value" id="cookie_value" required>
+      </div>
+      <div class="form-group">
+        <label for="cookie_expiration">Expiration (seconds)</label>
+        <input type="number" class="form-control" name="cookie_expiration" id="cookie_expiration" required>
+      </div>
+      <button type="submit" class="btn btn-primary mt-3">Add Cookie</button>
+    </form>
+
+    <h4 class="mt-5">Saved Cookies</h4>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Key</th>
+          <th>Value</th>
+          <th>Expiration</th>
+          <th>Created At</th>
+          <th>Action</th>
+            <th>
+                <form method="post" action="{{ url_for('delete_all_cookies') }}">
+            <button type="submit" class="btn btn-warning">Delete all cookies</button>
+                </form>
+            </th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for key, cookie_data in cookies_data %}
+          <tr>
+            <td>{{ key  }}</td>
+             <td>{{ cookie_data['value'] }}</td>
+            <td>{{ cookie_data['expiration'] }}</td>
+            <td>{{ cookie_data['created_at'] }}</td>
+            <td>
+              <form method="post" action="{{ url_for('delete_cookie', key=key) }}">
+                <button type="submit" class="btn btn-danger">Delete</button>
+              </form>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% endif %}
+</div>
+{% endblock %}
