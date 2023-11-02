@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block title %}Portfolio{% endblock %}
+
+{% block content %}
+    <div class="container overflow-hidden text-center">
+      <div class="row gx-5">
+        <div class="col">
+         <div class="p-3">
+             <blockquote class="blockquote">
+                 <div class="container">
+                 <img src="{{ url_for('static', filename='images/face.jpg' ) }}" class="img-fluid w-75 rounded-image shadow" alt="...">
+                 </div>
+                     <h2 class="mt-4">Vitruk Maksym</h2>
+                  <p class="mb-0">
+                  Fascinated and deeply immersed in the world of programming, I am actively cultivating habits to become a proficient software developer.
+                      I am currently a student at PNU, acquiring programming
+                      skills for future achievements, while also keen on self-improvement in this field. <cite> Student, Developer Beginner</cite></p>
+              </blockquote>
+         </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container text-center ">
+        <h5></h5>
+      <div class="row g-0">
+        <div class="col">
+         <div class="p-3">
+             <a href=""><p>Gmail</p></a>
+             <p>maxdevelop@gmail.com</p>
+         </div>
+        </div>
+        <div class="col">
+          <div class="p-3">
+              <a href=""><p>Telegram</p></a>
+              <p>@maxxx</p>
+          </div>
+        </div>
+        <div class="col">
+          <div class="p-3">
+              <a href=""><p>Phone number</p></a>
+              <p>+380-96-58-12-881</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+{% endblock %}
