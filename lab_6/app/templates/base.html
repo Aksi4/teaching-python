@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    {% block additional_js %}
+    <script src="{{ url_for('static', filename='js/banner.js') }}"></script>
+{% endblock %}
+    <title>{% block title %} Portfolio {% endblock %}</title>
+</head>
+<body>
+{% include "nav.html" %}
+
+<div class="flash-messages">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                {% if category == 'success' %}
+                    <div class="alert alert-success alert-dismissible fade show position-fixed bottom-0 end-0" role="alert">
+                {% elif category == 'error' %}
+                    <div class="alert alert-danger alert-dismissible fade show position-fixed bottom-0 end-0" role="alert">
+                {% else %}
+                    <div class="alert alert-primary alert-dismissible fade show position-fixed bottom-0 end-0" role="alert">
+                {% endif %}
+                <div class="flash-messages-list">
+                    {{ message }}
+                </div>
+                <button type="button" id="close-button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+</div>
+
+
+{% block content %}
+<div class="d-flex justify-content-center align-items-center" style="height: 70vh;">
+    <h3>The canvas represents the code, and the artist skillfully paints solutions,<br>  one line at a time.</h3>
+</div>
+
+{% endblock %}
+
+</body>
+</html>
