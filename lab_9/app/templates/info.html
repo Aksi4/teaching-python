@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% block title %}Info{% endblock %}
+{% block content %}
+
+
+<div class="container mt-5 mb-3">
+  <h2 class="mb-3">Info</h2>
+  {% if 'username' %}
+    <h4 class="mb-3">You logged in as: {{current_user.username}}</h4>
+
+
+
+
+
+
+
+
+
+
+    <h4 class="mb-3 mt-5">Add Cookie</h4>
+    <form method="post" action="{{ url_for('add_cookie') }}">
+         {{ form.csrf_token }}
+      <div class="form-group">
+        <label for="cookie_key">Key</label>
+        <input type="text" class="form-control" name="cookie_key" id="cookie_key" required>
+      </div>
+      <div class="form-group">
+        <label for="cookie_value">Value</label>
+        <input type="text" class="form-control" name="cookie_value" id="cookie_value" required>
+      </div>
+      <div class="form-group">
+        <label for="cookie_expiration">Expiration (seconds)</label>
+        <input type="number" class="form-control" name="cookie_expiration" id="cookie_expiration" required>
+      </div>
+      <button type="submit" class="btn btn-primary mt-3">Add Cookie</button>
+    </form>
+
+    <h4 class="mt-5">Saved Cookies</h4>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Key</th>
+          <th>Value</th>
+          <th>Expiration</th>
+          <th>Created At</th>
+          <th>Action</th>
+            <th>
+                <form method="post" action="{{ url_for('delete_all_cookies') }}">
+                    {{ form.csrf_token }}
+            <button type="submit" class="btn btn-warning">Delete all cookies</button>
+                </form>
+            </th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for key, cookie_data in cookies_data %}
+          <tr>
+            <td>{{ key  }}</td>
+             <td>{{ cookie_data['value'] }}</td>
+            <td>{{ cookie_data['expiration'] }}</td>
+            <td>{{ cookie_data['created_at'] }}</td>
+            <td>
+              <form method="post" action="{{ url_for('delete_cookie', key=key) }}">
+                  {{ form.csrf_token }}
+                <button type="submit" class="btn btn-danger">Delete</button>
+              </form>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% endif %}
+</div>
+{% endblock %}
