@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}Create posts{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <h2>Create Post</h2>
+
+        <div class="row g-0">
+            <div class="col">
+                <div class="p-3">
+                    <form method="POST" enctype="multipart/form-data" action="{{ url_for('.create_post') }}">
+                        <div class="mb-3">
+                            {{ form.hidden_tag() }}
+                            {{ form.title.label(class="form-label") }}
+                            {{ form.title(class="form-control") }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form.text.label(class="form-label") }}
+                            {{ form.text(class="form-control") }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form.picture.label(class="form-label") }}
+                            {{ form.picture(class="form-control") }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form.type.label(class="form-label") }}
+                            {{ form.type(class="form-control") }}
+                        </div>
+                        <div class="mb-3 form-check">
+                            {{ form.enabled(class="form-check-input") }}
+                            {{ form.enabled.label(class="form-check-label") }}
+                        </div>
+                        {{ form.submit(class="btn btn-primary mt-3 mb-5", id="create_post_submit") }}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

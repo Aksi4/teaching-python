@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% block title %}Account{% endblock %}
+{% block content %}
+
+<div class="container mt-5">
+            <h2>Welcome to your account</h2>
+
+            <div class="d-flex flex-row mt-3 p-3">
+                <div >
+                    <img src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}"
+                         alt="Profile Picture" class="img-fluid rounded-4" style="max-width: 18em; min-width: 18em; height: auto;">
+                </div>
+                <div class="mx-3">
+
+                    <h5>Username:</h5> <p>{{ current_user.username }}</p>
+                    <h5>Email:</h5> <p>{{ current_user.email }}</p>
+                    <h5>About me:</h5>  <p>{{ current_user.about_me or 'Not provided' }}</p>
+                    <h5>Last seen:</h5>  <p>{{ current_user.last_seen }}</p>
+                </div>
+            </div>
+
+
+    <h4 class="mt-5">Update your account</h4>
+    <div class="row g-0">
+        <div class="col">
+            <div class="p-3">
+                <form method="POST" enctype="multipart/form-data" action="{{ url_for('.update_account') }}">
+{% if password_form %}
+                        <div class="mb-3">
+                            {{ update_account_form.hidden_tag() }}
+                            {{ update_account_form.username.label(class="form-label") }}
+                            {{ update_account_form.username(class="form-control", value=current_user.username) }}
+                        </div>
+                        <div class="mb-3">
+                            {{ update_account_form.email.label(class="form-label") }}
+                            {{ update_account_form.email(class="form-control", value=current_user.email) }}
+                        </div>
+                        <div class="mb-3">
+                            {{ update_account_form.picture.label(class="form-label") }}
+                            {{ update_account_form.picture(class="form-control") }}
+                        </div>
+                        <div class="mb-3">
+                            {{ update_account_form.about_me.label(class="form-label") }}
+                            {{ update_account_form.about_me(class="form-control", value=current_user.about_me) }}
+                        </div>
+                        {{ update_account_form.submit(class="btn btn-primary mt-3 mb-5", id="update_account_submit") }}
+{% endif %}
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <h4 class="mt-5">Change your password</h4>
+    <div class="row g-0">
+        <div class="col">
+            <div class="p-3">
+                <form method="POST" action="{{ url_for('.change_password') }}">
+                    {% if password_form %}
+                        <div class="mb-3">
+                            {{ password_form.hidden_tag() }}
+                            {{ password_form.current_password.label(class="form-label") }}
+                            {{ password_form.current_password(class="form-control") }}
+                        </div>
+                        <div class="mb-3">
+                            {{ password_form.new_password.label(class="form-label") }}
+                            {{ password_form.new_password(class="form-control") }}
+                        </div>
+                        <div class="mb-3">
+                            {{ password_form.confirm_password.label(class="form-label") }}
+                            {{ password_form.confirm_password(class="form-control") }}
+                        </div>
+                        {{ password_form.submit(class="btn btn-primary mt-3 mb-5") }}
+                    {% endif %}
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
